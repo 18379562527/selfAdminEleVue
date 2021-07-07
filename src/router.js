@@ -6,6 +6,7 @@ import common from '@/components/home/index.vue' // 公共组件 侧边栏加头
 Vue.use(VueRouter)
 
 let router = new VueRouter({
+    mode: 'hash',
     routes: [
         // 动态路径参数 以冒号开头
         { 
