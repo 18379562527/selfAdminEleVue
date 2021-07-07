@@ -15,6 +15,7 @@ let router = new VueRouter({
             children: [
                 {
                     path:'home',
+                    name:'首页',
                     component:() => import('@/pages/home.vue') 
                 }
             ]
