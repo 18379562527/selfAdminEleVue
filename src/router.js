@@ -1,55 +1,55 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import NProgress from 'nprogress' // 页面加载进度条
-import common from '@/components/home/index.vue' // 公共组件 侧边栏加头部
+import common from '@/components/common/index.vue' // 公共组件 侧边栏加头部
 
-Vue.use(VueRouter)
+//获取原型对象上的push函数
+const originalPush = VueRouter.prototype.push;
+//修改原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+}
+
+Vue.use(VueRouter);
+let menuList = [
+    { 
+        path: '/', 
+        component: common,
+        children: [
+            {
+                path:'/',
+                name:'首页',
+                iconCls:'el-icon-user-solid',
+                component:() => import('@/pages/home.vue') 
+            },
+            {
+                path:'/demo',
+                name:'测试',
+                iconCls:'el-icon-user-solid',
+                children: [
+                    {
+                        path:'/demo1',
+                        name:'测试1',
+                        component:() => import('@/pages/demo.vue'),
+                    },
+                    {
+                        path:'/demo2',
+                        name:'测试2',
+                        component:() => import('@/pages/demo2.vue'),
+                    }
+                ]
+            },
+        ]
+    },
+];
+let unMenuList = [
+    { path: '/login', component: () => import('@/pages/login/login.vue') },
+    { path: '/register', component: () => import('@/pages/login/register.vue') },
+]
+localStorage.setItem('menuList',JSON.stringify(menuList[0].children));
 
 let router = new VueRouter({
     mode: 'hash',
-    routes: [
-        // 动态路径参数 以冒号开头
-        { 
-            path: '/', 
-            component: common,
-            children: [
-                {
-                    path:'home',
-                    name:'首页',
-                    component:() => import('@/pages/home.vue') 
-                }
-            ]
-        },
-        { path: '/login', component: () => import('@/pages/login/login.vue') },
-        { path: '/register', component: () => import('@/pages/login/register.vue') },
-    ]
+    routes: menuList.concat(unMenuList)
 })
 
-router.beforeEach((to, from, next)=>{
-    // 进度条开始
-    NProgress.start()
-    console.log(to,from)
-    let arr = ['/register','/login'];
-    console.log(arr.includes(to.path))
-    if(arr.includes(to.path)){
-        // 进度条开始
-        next();
-        NProgress.done();
-    }else{
-        console.log(localStorage.token)
-        if(to.path === '/'){
-            localStorage.setItem("token", "111");
-        }
-        console.log('localStorage.token',localStorage.getItem('token'))
-        if(localStorage.getItem('token')){
-            // 进度条开始
-            next();
-            NProgress.done()
-        }else{
-            // 进度条开始
-            next({ path: '/login' })
-            NProgress.done()
-        }
-    }
-})
 export default router

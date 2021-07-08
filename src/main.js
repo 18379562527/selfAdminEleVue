@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import './element/index.js'
 import store from './store/index'
+import './units/globalComponment.js'
+import './permission.js'
 Vue.config.productionTip = false;
 
 
