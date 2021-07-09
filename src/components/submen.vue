@@ -9,10 +9,7 @@
                 <i :class="item.iconCls"></i>
                 <span slot="title">{{ item.name }}</span>
             </template>
-            <!-- <navigation-item v-for="(item2,index2) in item.children" :key="index2" :item="item2"></navigation-item > -->
-                <el-menu-item :index="item2.path" v-for="(item2,index2) in item.children" :key="index2">
-                    <span>{{ item2.name }}</span>
-                </el-menu-item>
+            <navigationitem v-for="(item2,index2) in item.children" :key="index2" :item="item2"></navigationitem>
         </el-submenu>
     </div>
 </template>

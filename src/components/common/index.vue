@@ -43,9 +43,9 @@
             v-for="(item,index) in tagList"
             :closable="!item.isUnClose"
             :disable-transitions="false"
-            :effect="tagIndex === index ? 'dark' : ''"
-            @click="goToUrl(item)"
-            @close="tagClose(item)">
+            :effect="tagIndex === index ? 'dark' : 'plain'"
+            @click="goToUrl(item,index)"
+            @close="tagClose(index)">
             {{item.name}}
           </el-tag>
         </div>
@@ -79,33 +79,35 @@ export default {
       return this.$store.state.a.tagList;
     },
     tagIndex(){
-      return this.$store.state.a.tagIndex;
+      return this.$store.getters['a/tagIndex'];
     }
   },
   mounted(){
-    console.log(this.$store.state)
   },
   methods: {
     tagClose(index){
-      let tagList = this.$store.state.a.tagList;
-      this.$emit('removeTagList',index);
-      console.log(tagList)
+      console.log(this.$route.path === this.tagList[index].path)
+      if(this.$route.path === this.tagList[index].path){
+        this.$store.commit('a/setTagIndex',0);
+        this.$router.push({path:'/'});
+      }else{
+        this.$store.commit('a/setTagIndex',this.$store.getters['a/tagIndex'] > index ? this.$store.getters['a/tagIndex'] - 1 : this.$store.getters['a/tagIndex']);
+      }
+      this.$store.commit('a/removeTagList',index);
     },
-    goToUrl(item){
-      this.$router.push({path:item.url});
+    goToUrl(item,index){
+      this.$router.push({path:item.path});
+      this.$store.commit('a/setTagIndex',index);
     },
     cutSidebar() {
       this.isShow = !this.isShow;
     },
     Fn(item) {
-      console.log(item);
-      console.log(this[item.clickFn]);
       if (this[item.clickFn]) {
         this[item.clickFn]();
       }
     },
     goOut() {
-      console.log("666");
       localStorage.setItem("token", "");
       this.$router.push({ path: "/login" });
     },

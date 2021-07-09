@@ -10,6 +10,7 @@ VueRouter.prototype.push = function push(location) {
 }
 
 Vue.use(VueRouter);
+
 let menuList = [
     { 
         path: '/', 
@@ -23,18 +24,25 @@ let menuList = [
             },
             {
                 path:'/demo',
-                name:'测试',
+                name:'服装管理',
                 iconCls:'el-icon-user-solid',
                 children: [
                     {
-                        path:'/demo1',
-                        name:'测试1',
+                        path:'/demo/demo1',
+                        name:'上衣',
                         component:() => import('@/pages/demo.vue'),
                     },
                     {
-                        path:'/demo2',
-                        name:'测试2',
+                        path:'/demo/demo2',
+                        name:'下装',
                         component:() => import('@/pages/demo2.vue'),
+                        children: [
+                            {
+                                path:'/demo/demo2/demo3',
+                                name:'短裤',
+                                component:() => import('@/pages/demo3.vue'),
+                            }
+                        ]
                     }
                 ]
             },
