@@ -1,12 +1,12 @@
 <template>
     <div class="slid-menu-item">
         <el-menu-item :index="item.path"  v-if="!item.children">
-            <i :class="item.iconCls"></i>
+            <svg-icon class-name="component" :icon-class="item.iconName" v-if="item.isShowIcon"/>
             <span slot="title">{{ item.name }}</span>
         </el-menu-item>
         <el-submenu :index="item.path" v-else>
             <template slot="title">
-                <i :class="item.iconCls"></i>
+                <svg-icon class-name="component" :icon-class="item.iconName" v-if="item.isShowIcon"/>
                 <span slot="title">{{ item.name }}</span>
             </template>
             <navigationitem v-for="(item2,index2) in item.children" :key="index2" :item="item2"></navigationitem>

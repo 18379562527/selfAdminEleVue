@@ -3,8 +3,8 @@
         <div>
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item v-for="(item,index) in breadcrumbList" :key="index">
-                    <a :href="item.path" v-if="item.isItClick && index !== breadcrumbList.length - 1">{{item.name}}</a>
-                    <span v-else>{{item.name}}</span>
+                    <!-- <a :href="item.path" v-if="item.isItClick && index !== breadcrumbList.length - 1">{{item.name}}</a> -->
+                    <span :class="{fWeight: item.isItClick && (index === 0 || (index > 0 && index !== breadcrumbList.length - 1))}" @click="goToUrl(item)">{{item.name}}</span>
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -40,6 +40,11 @@ export default {
         this.getBreadcrumbList(this.$route.path,this.menuList)
     },
     methods: {
+        goToUrl(item){
+            if(item.isItClick){
+                this.$router.push({path: item.path})
+            }
+        },
         //递归遍历菜单级数
         getBreadcrumbList(rootPath,menuList,step = 0){
             console.log(rootPath)
@@ -86,8 +91,11 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-.breadcrumb {
-    font-size: 18px;
+<style lang="scss" scoped>
+.el-breadcrumb {
+    .fWeight{
+        font-weight: bold;
+        cursor: pointer;
+    }
 }
 </style>

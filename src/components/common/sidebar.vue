@@ -74,9 +74,13 @@ export default {
 
 /deep/.el-menu-item{
     font-size:16px;
+    display: flex;
+    align-items: center;
 }
 /deep/.el-submenu__title,.el-submenu__title span{
     font-size:16px;
+    display: flex;
+    align-items: center;
 }
 /deep/.el-menu-item{
     font-size:16px;
@@ -93,5 +97,8 @@ export default {
 }
 /deep/.el-submenu__title.is-active {
     background: rgb(38, 52, 69) !important;
+}
+/deep/ .svg-icon{
+    margin-right:10px;
 }
 </style>

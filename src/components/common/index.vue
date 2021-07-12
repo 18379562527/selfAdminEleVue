@@ -86,7 +86,6 @@ export default {
   },
   methods: {
     tagClose(index){
-      console.log(this.$route.path === this.tagList[index].path)
       if(this.$route.path === this.tagList[index].path){
         this.$store.commit('a/setTagIndex',0);
         this.$router.push({path:'/'});
@@ -95,9 +94,8 @@ export default {
       }
       this.$store.commit('a/removeTagList',index);
     },
-    goToUrl(item,index){
+    goToUrl(item){
       this.$router.push({path:item.path});
-      this.$store.commit('a/setTagIndex',index);
     },
     cutSidebar() {
       this.isShow = !this.isShow;

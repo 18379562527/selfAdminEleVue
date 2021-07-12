@@ -32,6 +32,12 @@ router.beforeEach((to, from, next)=>{
             if(!isHave){
                 store.commit('a/addTagList',{name:to.name,path:to.path});
                 store.commit('a/setTagIndex', store.state.a.tagList.length - 1);
+            }else{
+                store.state.a.tagList.forEach((item,index)=>{
+                    if(item.path === to.path){
+                        store.commit('a/setTagIndex', index);
+                    }
+                })
             }
             // 进度条开始
             next();

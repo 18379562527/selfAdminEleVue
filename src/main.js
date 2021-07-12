@@ -5,6 +5,7 @@ import './element/index.js'
 import store from './store/index'
 import './units/globalComponment.js'
 import './permission.js'
+import './icons' // 图标
 Vue.config.productionTip = false;
 
 

@@ -17,15 +17,17 @@ let menuList = [
         component: common,
         children: [
             {
-                path:'/',
-                name:'首页',
-                iconCls:'el-icon-user-solid',
-                component:() => import('@/pages/home.vue') 
+                path: '/',
+                name: '首页',
+                iconName: 'component',
+                isShowIcon: true,
+                component: () => import('@/pages/home.vue') 
             },
             {
                 path:'/demo',
                 name:'服装管理',
-                iconCls:'el-icon-user-solid',
+                iconName: 'component',
+                isShowIcon: true,
                 children: [
                     {
                         path:'/demo/demo1',
@@ -35,7 +37,8 @@ let menuList = [
                     {
                         path:'/demo/demo2',
                         name:'下装',
-                        component:() => import('@/pages/demo2.vue'),
+                        iconName: 'component',
+                        isShowIcon: true,
                         children: [
                             {
                                 path:'/demo/demo2/demo3',
