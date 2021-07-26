@@ -24,6 +24,13 @@ let menuList = [
                 component: () => import('@/pages/home.vue') 
             },
             {
+                path: '/downloadPDF',
+                name: 'PDF下载',
+                iconName: 'component',
+                isShowIcon: true,
+                component: () => import('@/pages/downloadPDF') 
+            },
+            {
                 path:'/demo',
                 name:'服装管理',
                 iconName: 'component',

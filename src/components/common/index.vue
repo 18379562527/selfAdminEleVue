@@ -12,7 +12,7 @@
         </div>
         <div>
           <el-dropdown trigger="click" class="peopleImg" @command="Fn">
-            <img src="@/assets/people.jpg" />
+            <img src="@/assets/img/people.jpg" />
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
                 v-for="(item, index) in optionsList"
