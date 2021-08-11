@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import moduleA from './modules/moduleA'
-import moduleB from './modules/moduleB'
+import tag from './modules/tag'
+import permission from './modules/permission'
 import createVuexAlong from "vuex-along";
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
     modules: {
-        a: moduleA,
-        b: moduleB
+        tag: tag,
+        permission: permission
     },
     plugins: [
         createVuexAlong({
@@ -22,7 +22,7 @@ const store = new Vuex.Store({
             },
             session: {
                 // 保存模块 ma 中的 a1 到 sessionStorage
-                list: ["ma.a1"],
+                list: ["tag.tagList"],
             },
         }),
     ]

@@ -22,7 +22,8 @@ router.beforeEach((to, from, next)=>{
             localStorage.setItem("token", "111");
         }
         if(localStorage.getItem('token')){
-            let isHave = store.state.a.tagList.some(item=>{
+            console.log(store.state)
+            let isHave = store.state.tag.tagList.some(item=>{
                 if(item.path === to.path){
                     return true;
                 }else{
@@ -30,12 +31,12 @@ router.beforeEach((to, from, next)=>{
                 }
             })
             if(!isHave){
-                store.commit('a/addTagList',{name:to.name,path:to.path});
-                store.commit('a/setTagIndex', store.state.a.tagList.length - 1);
+                store.commit('tag/addTagList',{name:to.name,path:to.path});
+                store.commit('tag/setTagIndex', store.state.tag.tagList.length - 1);
             }else{
-                store.state.a.tagList.forEach((item,index)=>{
+                store.state.tag.tagList.forEach((item,index)=>{
                     if(item.path === to.path){
-                        store.commit('a/setTagIndex', index);
+                        store.commit('tag/setTagIndex', index);
                     }
                 })
             }

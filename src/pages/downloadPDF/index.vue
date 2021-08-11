@@ -14,7 +14,6 @@ export default {
         return {};
     },
     mounted() {
-        console.log(this.$store.state.a.count);
     },
     methods: {
         // html转换成canvas后生成图片导出pdf

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import common from '@/components/common/index.vue' // 公共组件 侧边栏加头部
-
+import mockData from '@/mockjs'
+console.log('-------------mockData',mockData)
 //获取原型对象上的push函数
 const originalPush = VueRouter.prototype.push;
 //修改原型对象中的push方法
@@ -26,48 +27,24 @@ let menuList = [
             {
                 path: '/downloadPDF',
                 name: 'PDF下载',
-                iconName: 'component',
+                iconName: 'pdf',
                 isShowIcon: true,
                 component: () => import('@/pages/downloadPDF') 
-            },
-            {
-                path:'/demo',
-                name:'服装管理',
-                iconName: 'component',
-                isShowIcon: true,
-                children: [
-                    {
-                        path:'/demo/demo1',
-                        name:'上衣',
-                        component:() => import('@/pages/demo.vue'),
-                    },
-                    {
-                        path:'/demo/demo2',
-                        name:'下装',
-                        iconName: 'component',
-                        isShowIcon: true,
-                        children: [
-                            {
-                                path:'/demo/demo2/demo3',
-                                name:'短裤',
-                                component:() => import('@/pages/demo3.vue'),
-                            }
-                        ]
-                    }
-                ]
             },
         ]
     },
 ];
-let unMenuList = [
+export const unMenuList = [
     { path: '/login', component: () => import('@/pages/login/login.vue') },
     { path: '/register', component: () => import('@/pages/login/register.vue') },
+    { path: '/404', component: () => import('@/pages/error-page/404.vue') },
+    { path: '/401', component: () => import('@/pages/error-page/401.vue') },
 ]
 localStorage.setItem('menuList',JSON.stringify(menuList[0].children));
 
+// router.addRoutes(menuList.concat(unMenuList))
 let router = new VueRouter({
     mode: 'hash',
     routes: menuList.concat(unMenuList)
 })
-
 export default router

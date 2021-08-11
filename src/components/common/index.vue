@@ -76,10 +76,11 @@ export default {
   },
   computed:{
     tagList(){
-      return this.$store.state.a.tagList;
+      console.log(this.$store.state.tag.tagList)
+      return this.$store.state.tag.tagList;
     },
     tagIndex(){
-      return this.$store.getters['a/tagIndex'];
+      return this.$store.getters['tag/tagIndex'];
     }
   },
   mounted(){
@@ -87,12 +88,12 @@ export default {
   methods: {
     tagClose(index){
       if(this.$route.path === this.tagList[index].path){
-        this.$store.commit('a/setTagIndex',0);
+        this.$store.commit('tag/setTagIndex',0);
         this.$router.push({path:'/'});
       }else{
-        this.$store.commit('a/setTagIndex',this.$store.getters['a/tagIndex'] > index ? this.$store.getters['a/tagIndex'] - 1 : this.$store.getters['a/tagIndex']);
+        this.$store.commit('tag/setTagIndex',this.$store.getters['tag/tagIndex'] > index ? this.$store.getters['tag/tagIndex'] - 1 : this.$store.getters['tag/tagIndex']);
       }
-      this.$store.commit('a/removeTagList',index);
+      this.$store.commit('tag/removeTagList',index);
     },
     goToUrl(item){
       this.$router.push({path:item.path});
@@ -120,6 +121,12 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  .contentLeft{
+    height:100vh;
+    max-width: 236px;
+    overflow-y: auto;
+    background: #263445 !important;
+  }
   .contentRight {
     width: 100%;
     height:100vh;

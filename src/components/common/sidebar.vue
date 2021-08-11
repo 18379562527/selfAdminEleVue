@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="conent">
         <el-menu
         class="el-menu-vertical-demo"
         @open="handleOpen"
@@ -32,7 +32,7 @@ export default {
     },
     computed:{
         path(){
-            return this.$store.getters['a/tagList'][this.$store.getters['a/tagIndex']].path;
+            return this.$store.getters['tag/tagList'][this.$store.getters['tag/tagIndex']].path;
         }
     },
     mounted() {
@@ -44,9 +44,9 @@ export default {
     },
     methods: {
         menuSelect(path){
-            this.$store.getters['a/tagList'].forEach((item,index) => {
+            this.$store.getters['tag/tagList'].forEach((item,index) => {
                 if(item.path === path){
-                    this.$store.commit('a/setTagIndex',index);
+                    this.$store.commit('tag/setTagIndex',index);
                 }
             });
         },
@@ -64,9 +64,10 @@ export default {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
 }
+.conent{
+    max-width:200px;
+}
 /deep/ .el-menu {
-    min-height:100vh;
-    height: 100%;
     overflow: hidden;
     background: rgb(38, 52, 69) !important;
     color:rgb(191, 203, 217) !important;
