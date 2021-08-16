@@ -3,14 +3,15 @@ function resolve(dir) {
     return path.join(__dirname, dir);
 }
 console.log(process.env.NODE_ENV)
+console.log(process.env.VUE_APP_PROXY_URL)
 module.exports = {
     publicPath: './',
     devServer: {
         open: true, // 是否自动打开默认浏览器
         port: 8888, // 端口号
         proxy: {
-            '/api': {
-                target: 'http://localhost:3000',
+            '/api/selfAdminEleVue': {
+                target: process.env.VUE_APP_PROXY_URL,
                 ws: true,
                 changeOrigin: true
             },

@@ -21,7 +21,8 @@ const store = new Vuex.Store({
                 isFilter: true,
             },
             session: {
-                // 保存模块 ma 中的 a1 到 sessionStorage
+                // 保存模块 ma 中的 a1 到 sessionStorage  
+                // tag.tagList 标签列表
                 list: ["tag.tagList"],
             },
         }),

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import 'element-ui/lib/theme-chalk/index.css'
 import {
     // Pagination,
-    // Dialog,
+    Dialog,
     // Autocomplete,
     Dropdown,
     DropdownMenu,
@@ -43,8 +43,8 @@ import {
     // Alert,
     // Slider,
     // Icon,
-    // Row,
-    // Col,
+    Row,
+    Col,
     // Upload,
     // Progress,
     // Spinner,
@@ -81,7 +81,7 @@ import {
 } from 'element-ui';
 
 // Vue.use(Pagination);
-// Vue.use(Dialog);
+Vue.use(Dialog);
 // Vue.use(Autocomplete);
 Vue.use(Dropdown);
 Vue.use(DropdownMenu);
@@ -122,8 +122,8 @@ Vue.use(Tag);
 // Vue.use(Alert);
 // Vue.use(Slider);
 // Vue.use(Icon);
-// Vue.use(Row);
-// Vue.use(Col);
+Vue.use(Row);
+Vue.use(Col);
 // Vue.use(Upload);
 // Vue.use(Progress);
 // Vue.use(Spinner);

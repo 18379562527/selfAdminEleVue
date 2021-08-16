@@ -7,6 +7,8 @@ import './units/globalComponment.js'
 import './permission.js'
 import './icons' // 图标
 Vue.config.productionTip = false;
+import serverApi from './units/server-api'
+Vue.prototype.http = new serverApi();
 
 
 new Vue({

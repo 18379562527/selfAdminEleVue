@@ -147,6 +147,9 @@ export default {
         i {
           margin-right: 20px;
         }
+        .el-icon-s-fold,.el-icon-s-unfold{
+          cursor: pointer;
+        }
       }
       .peopleImg {
         margin-right: 5px;
