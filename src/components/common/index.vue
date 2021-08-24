@@ -128,7 +128,7 @@ export default {
     background: #263445 !important;
   }
   .contentRight {
-    width: 100%;
+    width:100%;
     height:100vh;
     display: flex;
     flex-wrap: wrap;
@@ -195,7 +195,7 @@ div::-webkit-scrollbar-thumb:hover{
   background: #999;
 }
 div::-webkit-scrollbar-corner{
-  background: #179a16;
+  background: transparent;
 }
 /* 改变elementui 侧边栏移入颜色 */
 .el-menu--vertical{

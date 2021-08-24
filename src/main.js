@@ -6,9 +6,11 @@ import store from './store/index'
 import './units/globalComponment.js'
 import './permission.js'
 import './icons' // 图标
+
 Vue.config.productionTip = false;
+//axios封装
 import serverApi from './units/server-api'
-Vue.prototype.http = new serverApi();
+Vue.prototype.$http = new serverApi();
 
 
 new Vue({

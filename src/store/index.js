@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import tag from './modules/tag'
-import permission from './modules/permission'
+import permission from './modules/user'
 import createVuexAlong from "vuex-along";
 
 Vue.use(Vuex)

@@ -2,6 +2,7 @@
     <div class="slid-menu-item">
         <el-menu-item :index="item.path"  v-if="!item.children">
             <svg-icon class-name="component" :icon-class="item.iconName" v-if="item.isShowIcon"/>
+            <i :class="item.iconName" v-else ></i>
             <span slot="title">{{ item.name }}</span>
         </el-menu-item>
         <el-submenu :index="item.path" v-else>

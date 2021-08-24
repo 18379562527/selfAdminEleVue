@@ -21,7 +21,7 @@ let menuList = [
                 name: '首页',
                 iconName: 'component',
                 isShowIcon: true,
-                component: () => import('@/pages/home.vue') 
+                component: () => import('@/pages/home') 
             },
             {
                 path: '/downloadPDF',
@@ -30,6 +30,21 @@ let menuList = [
                 isShowIcon: true,
                 component: () => import('@/pages/downloadPDF') 
             },
+            {
+                path: '/API',
+                name: '组件API',
+                iconName: 'API',
+                isShowIcon: true,
+                component: () => import('@/pages/API') ,
+                children:[
+                    {
+                        path: '/API/commonTab',
+                        name: '表格组件',
+                        component: () => import('@/pages/API/tab.vue') 
+                    },
+                ]
+            },
+            
         ]
     },
 ];

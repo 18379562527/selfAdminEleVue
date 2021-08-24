@@ -11,7 +11,7 @@ import {
     Submenu,
     MenuItem,
     MenuItemGroup,
-    // Input,
+    Input,
     // InputNumber,
     // Radio,
     // RadioGroup,
@@ -25,17 +25,17 @@ import {
     // OptionGroup,
     Button,
     // ButtonGroup,
-    // Table,
-    // TableColumn,
+    Table,
+    TableColumn,
     // DatePicker,
     // TimeSelect,
     // TimePicker,
     // Popover,
-    // Tooltip,
+    Tooltip,
     Breadcrumb,
     BreadcrumbItem,
-    // Form,
-    // FormItem,
+    Form,
+    FormItem,
     // Tabs,
     // TabPane,
     Tag,
@@ -75,7 +75,7 @@ import {
     // PageHeader,
     // CascaderPanel,
     // Loading,
-    // MessageBox,
+    MessageBox,
     // Message,
     // Notification
 } from 'element-ui';
@@ -90,7 +90,7 @@ Vue.use(Menu);
 Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
-// Vue.use(Input);
+Vue.use(Input);
 // Vue.use(InputNumber);
 // Vue.use(Radio);
 // Vue.use(RadioGroup);
@@ -104,17 +104,17 @@ Vue.use(MenuItemGroup);
 // Vue.use(OptionGroup);
 Vue.use(Button);
 // Vue.use(ButtonGroup);
-// Vue.use(Table);
-// Vue.use(TableColumn);
+Vue.use(Table);
+Vue.use(TableColumn);
 // Vue.use(DatePicker);
 // Vue.use(TimeSelect);
 // Vue.use(TimePicker);
 // Vue.use(Popover);
-// Vue.use(Tooltip);
+Vue.use(Tooltip);
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
-// Vue.use(Form);
-// Vue.use(FormItem);
+Vue.use(Form);
+Vue.use(FormItem);
 // Vue.use(Tabs);
 // Vue.use(TabPane);
 Vue.use(Tag);
@@ -157,9 +157,9 @@ Vue.use(Col);
 // Vue.use(Loading.directive);
 
 // Vue.prototype.$loading = Loading.service;
-// Vue.prototype.$msgbox = MessageBox;
-// Vue.prototype.$alert = MessageBox.alert;
-// Vue.prototype.$confirm = MessageBox.confirm;
-// Vue.prototype.$prompt = MessageBox.prompt;
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$alert = MessageBox.alert;
+Vue.prototype.$confirm = MessageBox.confirm;
+Vue.prototype.$prompt = MessageBox.prompt;
 // Vue.prototype.$notify = Notification;
 // Vue.prototype.$message = Message;

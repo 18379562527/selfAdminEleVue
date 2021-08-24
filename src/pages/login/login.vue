@@ -6,15 +6,15 @@
             <h3 class="title">Login Form</h3>
         </div>
 
-        <el-form-item prop="username">
+        <el-form-item prop="userName">
             <span class="svg-container">
             <svg-icon icon-class="user" />
             </span>
             <el-input
-            ref="username"
-            v-model="loginForm.username"
-            placeholder="Username"
-            name="username"
+            ref="userName"
+            v-model="loginForm.userName"
+            placeholder="用户名"
+            name="userName"
             type="text"
             tabindex="1"
             autocomplete="on"
@@ -31,7 +31,7 @@
                 ref="password"
                 v-model="loginForm.password"
                 :type="passwordType"
-                placeholder="Password"
+                placeholder="密码"
                 name="password"
                 tabindex="2"
                 autocomplete="on"
@@ -45,7 +45,7 @@
             </el-form-item>
         </el-tooltip>
 
-        <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+        <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="submit">Login</el-button>
 
         <div style="position:relative">
             <div class="tips">
@@ -53,143 +53,83 @@
             <span>Password : any</span>
             </div>
             <div class="tips">
-            <span style="margin-right:18px;">Username : editor</span>
-            <span>Password : any</span>
+            <span style="margin-right:18px;">用户名 : editor</span>
+            <span>密码 : any</span>
             </div>
-
-            <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-            Or connect with
-            </el-button>
         </div>
         </el-form>
-
-        <el-dialog title="Or connect with" :visible.sync="showDialog">
-        Can not be simulated on local, so please combine you own business simulation! ! !
-        <br>
-        <br>
-        <br>
-        <social-sign />
-        </el-dialog>
     </div>
 </template>
 
 <script>
-    // import SocialSign from './components/SocialSignin'
-
     export default {
-    name: 'Login',
-    // components: { SocialSign },
-    data() {
-        const validatePassword = (rule, value, callback) => {
-        if (value.length < 6) {
-            callback(new Error('The password can not be less than 6 digits'))
-        } else {
-            callback()
-        }
-        }
-        return {
-        loginForm: {
-            username: 'admin',
-            password: '111111'
-        },
-        loginRules: {
-            username: [{ required: true, trigger: 'blur', }],
-            password: [{ required: true, trigger: 'blur', validator: validatePassword }]
-        },
-        passwordType: 'password',
-        capsTooltip: false,
-        loading: false,
-        showDialog: false,
-        redirect: undefined,
-        otherQuery: {}
-        }
-    },
-    watch: {
-        $route: {
-        handler: function(route) {
-            console.log(route)
-            const query = route.query
-            if (query) {
-            this.redirect = query.redirect
-            this.otherQuery = this.getOtherQuery(query)
-            }
-        },
-        immediate: true
-        }
-    },
-    created() {
-        // window.addEventListener('storage', this.afterQRScan)
-    },
-    mounted() {
-        if (this.loginForm.username === '') {
-        this.$refs.username.focus()
-        } else if (this.loginForm.password === '') {
-        this.$refs.password.focus()
-        }
-    },
-    destroyed() {
-        // window.removeEventListener('storage', this.afterQRScan)
-    },
-    methods: {
-        checkCapslock(e) {
-        const { key } = e
-        this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
-        },
-        showPwd() {
-        if (this.passwordType === 'password') {
-            this.passwordType = ''
-        } else {
-            this.passwordType = 'password'
-        }
-        this.$nextTick(() => {
-            this.$refs.password.focus()
-        })
-        },
-        handleLogin() {
-        this.$refs.loginForm.validate(valid => {
-            if (valid) {
-            this.loading = true
-            this.$store.dispatch('user/login', this.loginForm)
-                .then(() => {
-                this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-                this.loading = false
-                })
-                .catch(() => {
-                this.loading = false
-                })
+        name: 'Login',
+        data() {
+            const validatePassword = (rule, value, callback) => {
+            if (value.length < 6) {
+                callback(new Error('密码至少6位数'))
             } else {
-            console.log('error submit!!')
-            return false
+                callback()
             }
-        })
+            }
+            return {
+            loginForm: {
+                userName: 'admin',
+                password: '111111'
+            },
+            loginRules: {
+                userName: [{ required: true, trigger: 'blur', message: '请输入用户名'}],
+                password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+            },
+            passwordType: 'password',
+            capsTooltip: false,
+            loading: false,
+            otherQuery: {}
+            }
         },
-        getOtherQuery(query) {
-        return Object.keys(query).reduce((acc, cur) => {
-            if (cur !== 'redirect') {
-            acc[cur] = query[cur]
+        mounted() {
+            if (this.loginForm.userName === '') {
+            this.$refs.userName.focus()
+            } else if (this.loginForm.password === '') {
+            this.$refs.password.focus()
             }
-            return acc
-        }, {})
+        },
+        methods: {
+            checkCapslock(e) {
+                const { key } = e
+                this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
+            },
+            showPwd() {
+                if (this.passwordType === 'password') {
+                    this.passwordType = ''
+                } else {
+                    this.passwordType = 'password'
+                }
+                this.$nextTick(() => {
+                    this.$refs.password.focus()
+                })
+            },
+            submit() {
+                this.$refs.loginForm.validate(valid => {
+                    if (valid) {
+                        this.loading = true
+                        this.login();
+                    }
+                })
+            },
+            login(){
+                this.$http.post('/login',this.loginForm).then(([success,res])=>{
+                    console.log('登录')
+                    console.log(success,res)
+                    if(success){
+                        sessionStorage.setItem('accountToken',res.body.token);
+                        sessionStorage.setItem('userName',this.loginForm.userName);
+                        this.$router.push({path:'/index'});
+                    }
+                    this.loading = false;
+                })
+            },
         }
-        // afterQRScan() {
-        //   if (e.key === 'x-admin-oauth-code') {
-        //     const code = getQueryObject(e.newValue)
-        //     const codeMap = {
-        //       wechat: 'code',
-        //       tencent: 'code'
-        //     }
-        //     const type = codeMap[this.auth_type]
-        //     const codeName = code[type]
-        //     if (codeName) {
-        //       this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
-        //         this.$router.push({ path: this.redirect || '/' })
-        //       })
-        //     } else {
-        //       alert('第三方登录失败')
-        //     }
-        //   }
-        // }
-    }
     }
 </script>
 
@@ -209,6 +149,7 @@
 
     /* reset element-ui css */
     .login-container {
+        height: 100vh;
     .el-input {
         display: inline-block;
         height: 47px;

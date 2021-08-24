@@ -5,6 +5,11 @@
 </template>
 
 <script>
+  export default {
+    beforeCreate(){
+      this.$http.setInstantiateVue(this)
+    }
+  }
 </script>
 
 <style>
