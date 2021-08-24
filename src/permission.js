@@ -9,17 +9,20 @@ router.beforeEach(async (to, from, next) => {
     // 进度条开始
     NProgress.start()
     let hasAccountToken = sessionStorage.getItem("accountToken")
-    if (hasAccountToken) {
+    let userName = sessionStorage.getItem("userName")
+    if (hasAccountToken && userName) {
         //设置菜单列表
         if(!sessionStorage.getItem("menuList")){
             let http = new serverApi();
-            http.post('getMenuList',{roles:hasAccountToken}).then(([success,res])=>{
-                console.log('获取菜单列表');
-                console.log(success,res);
-                // if(success){
+            // http.post('/getMenuList',{roles:userName}).then(([success,res])=>{
+            //     console.log('获取菜单列表');
+            //     console.log(success,res);
+            //     if(success){
 
-                // }
-            })
+            //     }else{
+                    
+            //     }
+            // })
         }
         // 设置标签页
         let isHave = store.state.tag.tagList.some(item => {

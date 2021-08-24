@@ -129,6 +129,15 @@
                     this.loading = false;
                 })
             },
+            getMenuList(){
+                this.$http.post('/getMenuList',{roles:userName}).then(([success,res])=>{
+                    console.log('获取菜单列表');
+                    console.log(success,res);
+                    if(success && ){
+
+                    }
+                })
+            }
         }
     }
 </script>

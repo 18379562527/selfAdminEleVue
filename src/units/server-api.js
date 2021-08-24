@@ -15,7 +15,7 @@ let serverApi = function () {
         instantiateVue = newVue;
     }
     // axios封装post请求
-    this.post = function(url, data, headers){
+    this.post = function(url, data, message,isShowMessage = false, headers){
         return new Promise((resolve)=>{
             headers = headers ? headers : config.headers;
             let newUrl = baseUrl + '/api/selfAdminEleVue' + url;
@@ -32,7 +32,7 @@ let serverApi = function () {
                 if(res.data && res.data.state === 1){
                     resolve([true,res.data])
                 }else{
-                    instantiateVue.$alert(res.data.errCode + res.data.message,'提示');
+                    instantiateVue.$alert((isShowMessage && message) || res.data.errCode + res.data.message,'提示');
                     resolve([false,res.data])
                 }
             }).catch(err=>{
