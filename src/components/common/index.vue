@@ -1,7 +1,9 @@
 <template>
   <div class="content">
-    <div class="contentLeft">
+    <div class="contentLeft" :class="{showSidebar: isShow,hiddenSidebar: !isShow}">
       <Sidebar :isCollapse="isShow"></Sidebar>
+      <!-- width: 60px !important;
+      transition: width .3s; -->
     </div>
     <div class="contentRight">
       <header>
@@ -107,7 +109,7 @@ export default {
       }
     },
     goOut() {
-      localStorage.setItem("token", "");
+      sessionStorage.clear();
       this.$router.push({ path: "/login" });
     },
   },
@@ -121,11 +123,20 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  width:100%;
   .contentLeft{
     height:100vh;
-    max-width: 236px;
     overflow-y: auto;
+    width: 210px !important;
     background: #263445 !important;
+    &.showSidebar{
+      width: 67px !important;
+      transition: width .5s;
+    }
+    &.hiddenSidebar{
+      width: 210px !important;
+      transition: width .5s;
+    }
   }
   .contentRight {
     width:100%;

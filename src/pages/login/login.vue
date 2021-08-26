@@ -122,22 +122,24 @@
                     console.log('登录')
                     console.log(success,res)
                     if(success){
-                        sessionStorage.setItem('accountToken',res.body.token);
-                        sessionStorage.setItem('userName',this.loginForm.userName);
-                        this.$router.push({path:'/index'});
+                        let role = '';
+                        if(this.loginForm.userName === 'superAdmin'){
+                            role = '2';
+                        }else if(this.loginForm.userName === 'admin'){
+                            role = '1';
+                        }else{
+                            role = '0';
+                        }
+                        sessionStorage.setItem('accountToken', res.body.token);
+                        sessionStorage.setItem('userName', this.loginForm.userName);
+                        sessionStorage.setItem('role',role);
+                        this.$store.commit('user/setRelo', role)
+                        this.$store.commit('user/setToken', res.body.token)
+                        this.$router.push({path:'/'});
                     }
                     this.loading = false;
                 })
             },
-            getMenuList(){
-                this.$http.post('/getMenuList',{roles:userName}).then(([success,res])=>{
-                    console.log('获取菜单列表');
-                    console.log(success,res);
-                    if(success && ){
-
-                    }
-                })
-            }
         }
     }
 </script>

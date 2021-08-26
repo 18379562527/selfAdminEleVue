@@ -2,28 +2,18 @@ import router from './router'
 import store from './store/index'
 import NProgress from 'nprogress' // 页面加载进度条
 import 'nprogress/nprogress.css' // 进度条样式
-import serverApi from '@/units/server-api.js'
+import {defaultRouters} from './router'
+// import serverApi from '@/units/server-api.js'
 NProgress.configure({ showSpinner: false }) // 页面加载进度条配置
 router.beforeEach(async (to, from, next) => {
     console.log(to, from)
+    console.log('defaultRouters',defaultRouters)
     // 进度条开始
     NProgress.start()
-    let hasAccountToken = sessionStorage.getItem("accountToken")
-    let userName = sessionStorage.getItem("userName")
+    let hasAccountToken = sessionStorage.accountToken
+    let userName = sessionStorage.accountToken
+    // let menuList = JSON.parse(sessionStorage.menuList)
     if (hasAccountToken && userName) {
-        //设置菜单列表
-        if(!sessionStorage.getItem("menuList")){
-            let http = new serverApi();
-            // http.post('/getMenuList',{roles:userName}).then(([success,res])=>{
-            //     console.log('获取菜单列表');
-            //     console.log(success,res);
-            //     if(success){
-
-            //     }else{
-                    
-            //     }
-            // })
-        }
         // 设置标签页
         let isHave = store.state.tag.tagList.some(item => {
             if (item.path === to.path) {
@@ -46,7 +36,7 @@ router.beforeEach(async (to, from, next) => {
         } else {
             store.commit('tag/setTagIndex', 0);
         }
-        next()
+        next();
     }else{
         // 当进入的是当前页不进行跳转
         if (to.path === from.path) {
@@ -59,24 +49,6 @@ router.beforeEach(async (to, from, next) => {
             next();
         } else {
             next({ path: '/login' });
-            // if (to.path === '/') {
-            //     localStorage.setItem("token", "111");
-            // }
-
-            // if (localStorage.getItem('token')) {
-            //     let menuList = await getMenu();
-            //     console.log('menuList', menuList)
-            //     console.log(store.state)
-            //     console.log('getPage',parse_menu(menuList.data))
-            //     if(!localStorage.menuList){
-            //         localStorage.setItem('menuList',mockData);
-            //     }
-                
-            //     next();
-            // } else {
-            //     // 进度条开始
-            //     next({ path: '/login' });
-            // }
         }
     }
 })

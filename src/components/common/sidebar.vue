@@ -1,21 +1,19 @@
 <template>
-    <div class="conent">
-        <el-menu
-        class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
-        :collapse="isCollapse"
-        background-color="rgb(48, 65, 86)"
-        text-color="rgb(191, 203, 217)"
-        :collapse-transition="true"
-        mode="vertical"
-        :router="true"
-        :default-active="path"
-        @select="menuSelect"
-        >
+    <el-menu
+    class="el-menu-vertical-demo"
+    @open="handleOpen"
+    @close="handleClose"
+    :collapse="isCollapse"
+    background-color="rgb(48, 65, 86)"
+    text-color="rgb(191, 203, 217)"
+    :collapse-transition="true"
+    mode="vertical"
+    :router="true"
+    :default-active="path"
+    @select="menuSelect"
+    >
         <navigationitem v-for="(item, index) in menuList" :key="index" :item="item" />
-        </el-menu>
-    </div>
+    </el-menu>
 </template>
 <script>
 export default {
@@ -36,13 +34,18 @@ export default {
         }
     },
     mounted() {
-        if (localStorage.menuList) {
-            this.menuList = JSON.parse(localStorage.menuList);
-        } else {
-            this.$router.push({ path: "/login" });
-        }
+        this.getMenuList()
     },
     methods: {
+        getMenuList(){
+            this.$http.post('/getMenuList',{role: sessionStorage.userName}).then(([success,res])=>{
+                console.log('获取菜单列表');
+                console.log(success,res);
+                if(success){
+                    this.menuList = res.body;
+                }
+            })
+        },
         menuSelect(path){
             this.$store.getters['tag/tagList'].forEach((item,index) => {
                 if(item.path === path){
@@ -61,16 +64,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-}
-.conent{
-    max-width:200px;
-}
 /deep/ .el-menu {
     overflow: hidden;
     background: rgb(38, 52, 69) !important;
     color:rgb(191, 203, 217) !important;
+    width: 100% !important;
 }
 
 /deep/.el-menu-item{
