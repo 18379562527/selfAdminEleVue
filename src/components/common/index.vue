@@ -127,7 +127,7 @@ export default {
   .contentLeft{
     height:100vh;
     overflow-y: auto;
-    width: 210px !important;
+    min-width: 67px !important;
     background: #263445 !important;
     &.showSidebar{
       width: 67px !important;

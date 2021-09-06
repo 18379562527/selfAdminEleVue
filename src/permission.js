@@ -2,18 +2,15 @@ import router from './router'
 import store from './store/index'
 import NProgress from 'nprogress' // 页面加载进度条
 import 'nprogress/nprogress.css' // 进度条样式
-import {defaultRouters} from './router'
-// import serverApi from '@/units/server-api.js'
+
 NProgress.configure({ showSpinner: false }) // 页面加载进度条配置
+
 router.beforeEach(async (to, from, next) => {
     console.log(to, from)
-    console.log('defaultRouters',defaultRouters)
     // 进度条开始
     NProgress.start()
     let hasAccountToken = sessionStorage.accountToken
-    let userName = sessionStorage.accountToken
-    // let menuList = JSON.parse(sessionStorage.menuList)
-    if (hasAccountToken && userName) {
+    if (hasAccountToken) {
         // 设置标签页
         let isHave = store.state.tag.tagList.some(item => {
             if (item.path === to.path) {

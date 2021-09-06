@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import 'element-ui/lib/theme-chalk/index.css'
+import '@/styles/index.scss' // 公共 CSS
 import {
     // Pagination,
     Dialog,

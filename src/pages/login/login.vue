@@ -49,12 +49,16 @@
 
         <div style="position:relative">
             <div class="tips">
-            <span>Username : admin</span>
-            <span>Password : any</span>
+                <span>用户名 : superAdmin</span>
+                <span>密码 : any</span>
             </div>
             <div class="tips">
-            <span style="margin-right:18px;">用户名 : editor</span>
-            <span>密码 : any</span>
+                <span style="margin-right:18px;">用户名 : editor</span>
+                <span>密码 : any</span>
+            </div>
+            <div class="tips">
+                <span style="margin-right:18px;">用户名 : any</span>
+                <span>密码 : any</span>
             </div>
         </div>
         </el-form>

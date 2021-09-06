@@ -1,19 +1,21 @@
 <template>
-    <el-menu
-    class="el-menu-vertical-demo"
-    @open="handleOpen"
-    @close="handleClose"
-    :collapse="isCollapse"
-    background-color="rgb(48, 65, 86)"
-    text-color="rgb(191, 203, 217)"
-    :collapse-transition="true"
-    mode="vertical"
-    :router="true"
-    :default-active="path"
-    @select="menuSelect"
-    >
-        <navigationitem v-for="(item, index) in menuList" :key="index" :item="item" />
-    </el-menu>
+    <el-scrollbar wrap-class="scrollbar-wrapper">
+        <el-menu
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        :collapse="isCollapse"
+        background-color="rgb(48, 65, 86)"
+        text-color="rgb(191, 203, 217)"
+        :collapse-transition="true"
+        mode="vertical"
+        :router="true"
+        :default-active="path"
+        @select="menuSelect"
+        >
+            <navigationitem v-for="(item, index) in menuList" :key="index" :item="item" />
+        </el-menu>
+    </el-scrollbar>
 </template>
 <script>
 export default {
