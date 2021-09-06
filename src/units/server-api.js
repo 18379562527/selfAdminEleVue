@@ -7,7 +7,7 @@ let serverApi = function () {
         headers : {
             'Content-Type': 'application/json',
         },
-        timeout: '60',
+        timeout: '60000', //60秒超时时间
         withCredentials: false  // 是否跨域
     }
     // 设置new出来的vue实列
@@ -36,6 +36,7 @@ let serverApi = function () {
                     resolve([false,res.data])
                 }
             }).catch(err=>{
+                console.log(err)
                 resolve(err)
             })
         })

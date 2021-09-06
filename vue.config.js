@@ -8,7 +8,7 @@ module.exports = {
     publicPath: './',
     devServer: {
         open: true, // 是否自动打开默认浏览器
-        port: 8888, // 端口号
+        port: 8080, // 端口号
         proxy: {
             '/api/selfAdminEleVue': {
                 target: process.env.VUE_APP_PROXY_URL,
