@@ -1,5 +1,5 @@
 <template>
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+    <div class="scrollbar-wrapper">
         <el-menu
         class="el-menu-vertical-demo"
         @open="handleOpen"
@@ -15,7 +15,7 @@
         >
             <navigationitem v-for="(item, index) in menuList" :key="index" :item="item" />
         </el-menu>
-    </el-scrollbar>
+    </div>
 </template>
 <script>
 export default {

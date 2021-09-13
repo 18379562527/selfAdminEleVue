@@ -24,7 +24,7 @@ export default {
             breadcrumbList: [
                 {path: '/', name: '首页',isItClick:true}
             ],
-            menuList: JSON.parse(localStorage.menuList)
+            menuList: sessionStorage.menuList ? JSON.parse(sessionStorage.menuList) : []
         };
     },
     watch:{
@@ -69,8 +69,6 @@ export default {
             console.log('findPath',findPath)
             menuList.forEach(item=>{
                 if(item.path === findPath && item.path !== '/'){ 
-                    
-                    console.log()
                     if(item.children && item.children.length > 0){
                         this.breadcrumbList.push({
                             path: item.path,
